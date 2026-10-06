@@ -1,5 +1,5 @@
 /* Caches only this shell (page, manifest, icons) so the app opens instantly.
-   It never touches Google traffic — your ledger data always comes live from
+   It never touches Google traffic â€” your ledger data always comes live from
    the Sheet, and nothing financial is stored on the phone. */
 const CACHE = 'kaixiao-shell-v1';
 const ASSETS = ['./', './index.html', './manifest.webmanifest',
