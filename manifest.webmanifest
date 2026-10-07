@@ -27,5 +27,6 @@
       "purpose": "maskable"
     }
   ],
-  "id": "./?app=kaixiao"
+  "id": "/SpendTrack/?app=spendtrack-2",
+  "orientation": "portrait"
 }
