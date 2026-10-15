@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>我们的开销</title>
 <meta name="theme-color" content="#F1F0EC">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,9 +13,7 @@
 <link rel="apple-touch-icon" href="icons/kaixiao-touch-180.png?v=3">
 <link rel="icon" type="image/png" href="icons/kaixiao-192.png?v=3">
 <style>
-  html,body{ margin:0; height:100%; background:#F1F0EC; overflow:hidden; }
-  /* The app lives in this frame. Insets keep it clear of the notch and the
-     home-indicator area when launched from the home screen. */
+  html,body{ margin:0; height:100%; background:#F1F0EC; overflow:hidden; touch-action:pan-x pan-y; }
   #app{ position:fixed; top:env(safe-area-inset-top,0px); left:0; right:0; bottom:0;
         width:100%; height:calc(100% - env(safe-area-inset-top,0px)); border:0; background:#F1F0EC; }
   #boot{ position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -39,6 +37,10 @@
     frame.src = APP_URL + (APP_URL.includes('?') ? '&' : '?') + 'v=2';
     frame.addEventListener('load', () => { const b = document.getElementById('boot'); if (b) b.remove(); });
   }
+
+  /* Block pinch-zoom on the outer shell too (iPhone ignores user-scalable). */
+  ['gesturestart','gesturechange','gestureend'].forEach(t =>
+    document.addEventListener(t, e => e.preventDefault(), { passive:false }));
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
